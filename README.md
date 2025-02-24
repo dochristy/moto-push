@@ -43,6 +43,34 @@ When your Lambda makes an S3 request:
 2. LocalStack's mock S3 service checks the local directory
 3. Responses match the AWS S3 API format
 
+```bash
+make invoke-local       
+Invoking Lambda function...
+awslocal lambda invoke \
+                --function-name test-lambda \
+                --payload '{"bucket": "test-bucket", "file_key": "test-file.txt"}' \
+                --log-type Tail \
+                output.json > lambda_response.json
+
+Function response:
+{"statusCode": 200, "headers": {"Content-Type": "application/json"}, "body": "{\"file_exists\": true, \"bucket\": \"test-bucket\", \"file_key\": \"test-file.txt\"}"}
+Function logs:
+START RequestId: 6b1e282c-52fd-4812-ac9d-d4203974d707 Version: $LATEST
+[INFO]  2025-02-24T04:21:39.319Z        6b1e282c-52fd-4812-ac9d-d4203974d707    Received event: {"bucket": "test-bucket", "file_key": "test-file.txt"}
+[INFO]  2025-02-24T04:21:39.320Z        6b1e282c-52fd-4812-ac9d-d4203974d707    Processing request for bucket=test-bucket, key=test-file.txt
+[INFO]  2025-02-24T04:21:39.320Z        6b1e282c-52fd-4812-ac9d-d4203974d707    Checking file existence: bucket=test-bucket, key=test-file.txt
+[INFO]  2025-02-24T04:21:39.334Z        6b1e282c-52fd-4812-ac9d-d4203974d707    Found credentials in environment variables.
+[INFO]  2025-02-24T04:21:39.560Z        6b1e282c-52fd-4812-ac9d-d4203974d707    Found endpoint for s3 via: environment_global.
+[INFO]  2025-02-24T04:21:39.575Z        6b1e282c-52fd-4812-ac9d-d4203974d707    File exists
+[INFO]  2025-02-24T04:21:39.576Z        6b1e282c-52fd-4812-ac9d-d4203974d707    Returning response: {"statusCode": 200, "headers": {"Content-Type": "application/json"}, "body": "{\"file_exists\": true, \"bucket\": \"test-bucket\", \"file_key\": \"test-file.txt\"}"}
+END RequestId: 6b1e282c-52fd-4812-ac9d-d4203974d707
+REPORT RequestId: 6b1e282c-52fd-4812-ac9d-d4203974d707  Duration: 257.86 ms     Billed Duration: 258 ms Memory Size: 128 MB     Max Memory Used: 128 MB 
+
+
+```
+
+
+
 ### Request Flow Diagram
 
 ```mermaid
