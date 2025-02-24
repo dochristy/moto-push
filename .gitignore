@@ -1,6 +1,46 @@
+# Create or edit .gitignore
+echo "# Virtual Environment
+moto-push/
 venv/
+env/
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+lib/
+bin/
+include/
+
+# Testing
 .coverage
 htmlcov/
-.env
+.pytest_cache/
+
+# OS
+.DS_Store" > .gitignore
+
+
+# Python
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
